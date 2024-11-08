@@ -1,7 +1,5 @@
+import {Fragment} from 'react';
 import {SkeletonProps, Skeleton} from '@mui/material';
-
-//
-//
 
 export const SkeletonOnLoading = ({
   isLoading,
@@ -16,6 +14,6 @@ export const SkeletonOnLoading = ({
       {children}
     </Skeleton>
   ) : (
-    children
+    <Fragment>{children}</Fragment>
   );
 };
