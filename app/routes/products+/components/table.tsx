@@ -1,7 +1,7 @@
 import {useTranslation} from 'react-i18next';
 import {useSnackbar} from 'notistack';
 
-import {Paper, Table, TableBody, TableContainer} from '@mui/material';
+import {Paper, Table, TableBody, TableContainer, useMediaQuery, Stack} from '@mui/material';
 
 import {useMutationProductsDelete} from '~/services/products';
 
@@ -12,6 +12,7 @@ import {ApiProduct} from '~/api-client/types';
 import {ProductsTableHead} from './table-head';
 import {ProductsTableRow} from './table-row';
 import {ProductsTableRowSkeleton} from './table-row-skeleton';
+import {ProductCard} from './mobile/card';
 
 //
 //
@@ -20,6 +21,7 @@ export const ProductsTable = ({data, isLoading}: {data?: ApiProduct[]; isLoading
   const {t} = useTranslation(['common']);
   const {enqueueSnackbar} = useSnackbar();
   const deleteItem = useMutationProductsDelete();
+  const isMobile = useMediaQuery((theme: any) => theme.breakpoints.down('sm'));
 
   //
 
@@ -42,7 +44,11 @@ export const ProductsTable = ({data, isLoading}: {data?: ApiProduct[]; isLoading
   //
   //
 
-  return (
+  return isMobile ? (
+    <Stack spacing={2}>
+      {data?.map(p => <ProductCard key={p.productId} product={p} doDeleteItem={doDeleteItem} />)}
+    </Stack>
+  ) : (
     <TableContainer component={Paper}>
       <Table sx={{minWidth: 650}}>
         <ProductsTableHead />
