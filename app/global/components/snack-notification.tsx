@@ -64,7 +64,7 @@ export const SnackNotification = React.forwardRef<
           color={color}
           severity={severity}
           onClose={noClose ? undefined : () => closeSnackbar(props.id)}
-          {...alertProps}
+          {...(alertProps as AlertProps)}
         />
       </SnackbarContent>
     );
