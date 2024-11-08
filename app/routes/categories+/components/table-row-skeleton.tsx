@@ -1,3 +1,4 @@
+import {Fragment} from 'react';
 import {Box, Button, Skeleton, Stack, TableCell, TableRow, Typography} from '@mui/material';
 
 //
@@ -36,5 +37,5 @@ export const CategoriesTableRowSkeleton = ({count = 3}: {count?: number}) => {
     );
   }
 
-  return rows;
+  return <Fragment>{rows}</Fragment>;
 };
